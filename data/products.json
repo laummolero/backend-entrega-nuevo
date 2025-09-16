@@ -1,0 +1,13 @@
+[
+  {
+    "id": "6ff1ff7a-2367-42ec-bb86-d1f7948c642e",
+    "title": "DAY6 4TH ALBUM THE DECADE",
+    "description": "music album",
+    "code": "M0001",
+    "price": 30,
+    "status": true,
+    "stock": 9,
+    "category": "music",
+    "thumbnails": []
+  }
+]
