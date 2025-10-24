@@ -6,10 +6,10 @@ const createProductForm = document.getElementById("createProductForm");
 console.log("Cliente conectado y escuchando eventos de socket...");
 
 socket.on("updateProducts", (products) => {
-  productsList.innerHTML = "";
+  productList.innerHTML = "";
 
   if (products.length === 0) {
-    productsList.innerHTML = `
+    productList.innerHTML = `
             <div class="col-12">
                 <div class="alert alert-warning">
                     No hay productos disponibles
@@ -21,20 +21,21 @@ socket.on("updateProducts", (products) => {
 
   products.forEach((product) => {
     const productCard = document.createElement("div");
-    productCard.className = "col-md-6 mb-3"; // Clases de Bootstrap para la columna
+    productCard.className = "col-md-6 mb-3";
     productCard.innerHTML = `
             <div class="card product-card">
                 <div class="card-body">
                     <h6 class="card-title">${product.title}</h6>
                     <p class="card-text">$${product.price}</p>
                     <p class="card-text"><small>Stock: ${product.stock}</small></p>
-                    <button class="btn btn-danger btn-sm" onclick="deleteProduct(${product.id})">
+                    
+                    <button class="btn btn-danger btn-sm" onclick="deleteProduct('${product._id}')">
                         Eliminar
                     </button>
                 </div>
             </div>
         `;
-    productsList.appendChild(productCard);
+    productList.appendChild(productCard);
   });
 });
 
@@ -58,9 +59,9 @@ createProductForm.addEventListener("submit", (e) => {
     },
     body: JSON.stringify(product),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.product && data.product.id) {
+  .then((response) => response.json())
+  .then((data) => {
+      if (data.product && data.product._id) {
         console.log("Producto añadido exitosamente");
         createProductForm.reset();
       } else {
@@ -68,15 +69,15 @@ createProductForm.addEventListener("submit", (e) => {
         alert(`Error: ${data.error}`);
       }
     })
-    .catch((error) => console.error("Error en la solicitud fetch:", error));
+  .catch((error) => console.error("Error en la solicitud fetch:", error));
 });
 
 function deleteProduct(id) {
   fetch(`/api/products/${id}`, {
     method: "DELETE",
   })
-    .then((response) => response.json())
-    .then((data) => {
+  .then((response) => response.json())
+  .then((data) => {
       if (data.message) {
         console.log("Producto eliminado exitosamente");
       } else {
@@ -84,5 +85,5 @@ function deleteProduct(id) {
         alert(`Error: ${data.error}`);
       }
     })
-    .catch((error) => console.error("Error en la solicitud fetch:", error));
+  .catch((error) => console.error("Error en la solicitud fetch:", error));
 }

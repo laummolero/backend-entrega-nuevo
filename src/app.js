@@ -7,6 +7,7 @@ import { fileURLToPath } from "url";
 import productsRouter from "./routes/products.js";
 import cartsRouter from "./routes/carts.js";
 import viewsRouter from "./routes/views.router.js";
+import mongoose from 'mongoose';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,6 +25,15 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.engine("handlebars", handlebars.engine());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "handlebars");
+const MONGO_URI = 'mongodb://127.0.0.1:27017/ecommerce'; 
+
+try {
+    await mongoose.connect(MONGO_URI);
+    console.log('Conectado a la base de datos MongoDB');
+} catch (error) {
+    console.error('Error de conexión a la base de datos:', error);
+    process.exit(1); 
+}
 
 app.use((req, res, next) => {
   req.io = io;

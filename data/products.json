@@ -9,5 +9,16 @@
     "stock": 9,
     "category": "music",
     "thumbnails": []
+  },
+  {
+    "id": "f97b9ee0-51c2-43be-aaab-026fce315b87",
+    "title": "DAY - The Day",
+    "description": "DAY6's first mini album",
+    "code": "M0002",
+    "price": 50000,
+    "status": true,
+    "stock": 5,
+    "category": "music",
+    "thumbnails": []
   }
 ]

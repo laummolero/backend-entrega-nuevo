@@ -1,0 +1,21 @@
+<div class="container">
+    <h1>Carrito de Compras (ID: {{cart._id}})</h1>
+    {{#if cart.products.length}}
+    <ul class="list-group">
+        {{#each cart.products}}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+                <h5>{{this.product.title}}</h5>
+                <p>Precio: ${{this.product.price}}</p>
+                <p>Cantidad: {{this.quantity}}</p>
+            </div>
+            <button class="btn btn-danger btn-sm">Eliminar</button>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <div class="alert alert-warning">
+        Tu carrito está vacío.
+    </div>
+    {{/if}}
+</div>
