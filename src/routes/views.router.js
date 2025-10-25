@@ -8,19 +8,10 @@ const router = Router();
 router.get('/', async (req, res) => {
     try {
         const result = await ProductDAO.getProducts({ limit: 10, page: 1 });
-        res.render('home', { products: result.docs });
+        res.render('home', { products: result.docs,
+            useWebsockets: true });
     } catch (error) {
         res.status(500).send('Error al obtener los productos');
-    }
-});
-
-// Ruta para la vista realTimeProducts.handlebars
-router.get('/realtimeproducts', async (req, res) => {
-    try {
-        const result = await ProductDAO.getProducts({ limit: 100 }); 
-        res.render('realTimeProducts', { products: result.docs });
-    } catch (error) {
-        res.status(500).send('Error al obtener los productos en tiempo real');
     }
 });
 
